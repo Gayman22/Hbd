@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Mr Emmanuel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      perspective: 1500px;
+    }
+
+    .flipper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.5s ease-in-out;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Page 1: Flower + Button */
+    .front {
+      background: radial-gradient(circle at center, #1e1e2f, #0d0d1a);
+    }
+
+    .scene {
+      perspective: 1000px;
+      margin-bottom: 30px;
+    }
+
+    .flower {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      animation: rotateFlower 20s infinite linear;
+    }
+
+    .petal {
+      position: absolute;
+      width: 60px;
+      height: 140px;
+      background: radial-gradient(ellipse at center, #ff69b4, #e91e63);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      transform-origin: bottom center;
+      opacity: 0;
+      animation: bloomPetal 2s ease-out forwards;
+      box-shadow: 0 0 15px #ff80ab99;
+    }
+
+    .petal:nth-child(n) {
+      animation-delay: calc(0.2s + 0.2s * var(--i));
+    }
+
+    .petal:nth-child(1)  { transform: rotateY(0deg) translateZ(80px) rotateX(-20deg); --i:0; }
+    .petal:nth-child(2)  { transform: rotateY(30deg) translateZ(80px) rotateX(-20deg); --i:1; }
+    .petal:nth-child(3)  { transform: rotateY(60deg) translateZ(80px) rotateX(-20deg); --i:2; }
+    .petal:nth-child(4)  { transform: rotateY(90deg) translateZ(80px) rotateX(-20deg); --i:3; }
+    .petal:nth-child(5)  { transform: rotateY(120deg) translateZ(80px) rotateX(-20deg); --i:4; }
+    .petal:nth-child(6)  { transform: rotateY(150deg) translateZ(80px) rotateX(-20deg); --i:5; }
+    .petal:nth-child(7)  { transform: rotateY(180deg) translateZ(80px) rotateX(-20deg); --i:6; }
+    .petal:nth-child(8)  { transform: rotateY(210deg) translateZ(80px) rotateX(-20deg); --i:7; }
+    .petal:nth-child(9)  { transform: rotateY(240deg) translateZ(80px) rotateX(-20deg); --i:8; }
+    .petal:nth-child(10) { transform: rotateY(270deg) translateZ(80px) rotateX(-20deg); --i:9; }
+    .petal:nth-child(11) { transform: rotateY(300deg) translateZ(80px) rotateX(-20deg); --i:10; }
+    .petal:nth-child(12) { transform: rotateY(330deg) translateZ(80px) rotateX(-20deg); --i:11; }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at center, #ffee58, #fbc02d);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px #fff176;
+      opacity: 0;
+      animation: appearCenter 1s ease-in 3s forwards;
+    }
+
+    @keyframes bloomPetal {
+      0% {
+        opacity: 0;
+        transform: scale(0.2) translateZ(0) rotateX(90deg);
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes appearCenter {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotateFlower {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
+    }
+
+    .message {
+      font-size: 2em;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 0 10px #ff4081;
+      animation: fadeIn 2s ease-in-out 4s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .next-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4081aa;
+      transition: transform 0.2s;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Page 2: Storyline */
+    .back {
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      transform: rotateY(180deg);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .back h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .back p {
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+      color: #f0f0f0;
+    }
+
+    /* Flip logic */
+    .flip .flipper {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="flipper">
+      <!-- PAGE 1 -->
+      <div class="page front">
+        <div class="scene">
+          <div class="flower">
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="center"></div>
+          </div>
+        </div>
+        <div class="message">🎉 Happy Birthday Mr Emmanuel — You Are the Best! 🎂</div>
+        <button class="next-btn" onclick="flip()">See Why We Love Him ❤️</button>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page back">
+        <h1>Why Mr Emmanuel is Amazing</h1>
+        <p>
+          Mr Emmanuel is not just a mentor, but a light to everyone around him. His wisdom, patience,
+          and strength have inspired us to reach new heights. He listens with empathy, teaches with passion,
+          and leads by example. <br><br>
+          Whether it's guiding us through tough decisions, sharing laughter in good times, or standing by us in challenges,
+          Mr Emmanuel proves every day why he's truly one of a kind.
+          <br><br>
+          We are lucky — no, blessed — to have him in our lives.
+        </p>
+        <a href="page2.html"><button class="next-btn">Next</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function flip() {
+      document.getElementById('container').classList.add('flip');
+    }
+  </script>
+</body>
+</html>
+

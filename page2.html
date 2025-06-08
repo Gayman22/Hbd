@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Why Mr Emmanuel is the Best</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%; width: 100%;
+      background: radial-gradient(ellipse at center, #000000, #120024);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      text-align: center;
+      color: #ff3e9d;
+      text-shadow:
+        0 0 10px #ff3e9d,
+        0 0 20px #ff3e9d,
+        0 0 40px #ff3e9d,
+        0 0 80px #ff3e9d;
+      margin-bottom: 40px;
+    }
+
+    .story-block {
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .story-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .story-block h2 {
+      font-size: 2rem;
+      color: #ff80bf;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px #ff80bf;
+    }
+
+    .story-block p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #f8a1cc;
+      text-shadow: 0 0 6px #f8a1cc;
+    }
+
+    .next-btn {
+      display: block;
+      margin: 60px auto 40px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      background: #ff3e9d;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff3e9daa;
+      transition: transform 0.2s;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Why Mr Emmanuel is The Best</h1>
+
+    <div class="story-block">
+      <h2>Dedication</h2>
+      <p>Mr Emmanuel works tirelessly to inspire and guide us, always going the extra mile to ensure we succeed.</p>
+    </div>
+
+    <div class="story-block">
+      <h2>Kindness</h2>
+      <p>His warm heart and patience create a welcoming environment where everyone feels valued and heard.</p>
+    </div>
+
+    <div class="story-block">
+      <h2>Wisdom</h2>
+      <p>With a wealth of knowledge, he shares insights that enlighten and encourage growth in every student.</p>
+    </div>
+
+    <div class="story-block">
+      <h2>Motivation</h2>
+      <p>Mr Emmanuel’s encouragement pushes us to believe in ourselves and reach heights we never thought possible.</p>
+    </div>
+
+    <div class="story-block">
+      <h2>Gratitude</h2>
+      <p>We are deeply thankful for his unwavering support and genuine care in our journey.</p>
+    </div>
+
+    <button class="next-btn" onclick="location.href='page3.html'">Next</button>
+  </div>
+
+  <script>
+    const blocks = document.querySelectorAll('.story-block');
+
+    function revealOnScroll() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      blocks.forEach(block => {
+        const blockTop = block.getBoundingClientRect().top;
+
+        if(blockTop < triggerBottom) {
+          block.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>

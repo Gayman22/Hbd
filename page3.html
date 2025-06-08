@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Highlights & Quotes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%; width: 100%;
+      background: radial-gradient(circle, #000000, #1a001a);
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff3e9d;
+      text-shadow:
+        0 0 10px #ff3e9d,
+        0 0 20px #ff3e9d,
+        0 0 40px #ff3e9d,
+        0 0 80px #ff3e9d;
+      margin-top: 30px;
+    }
+
+    .carousel {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      height: 220px;
+      margin: 40px auto 20px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #1f001f;
+      box-shadow: 0 0 30px #ff3e9d88;
+    }
+
+    .slides {
+      display: flex;
+      width: 500%;
+      height: 100%;
+      transition: transform 0.7s ease-in-out;
+    }
+
+    .slide {
+      flex: 1 0 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #ff80bf;
+      text-shadow: 0 0 8px #ff80bf;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .slide p {
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: #ff3e9dcc;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 10px;
+      transition: color 0.3s;
+    }
+
+    .nav-arrow:hover {
+      color: #ff1493;
+    }
+
+    .left-arrow {
+      left: 10px;
+    }
+
+    .right-arrow {
+      right: 10px;
+    }
+
+    .next-btn {
+      margin: 20px auto 40px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      background: #ff1493;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff1493aa;
+      transition: transform 0.2s;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Highlights & Quotes About Mr Emmanuel</h1>
+  <div class="carousel">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <strong>“A true mentor and friend.”</strong>
+        <p>- Mrs vera</p>
+      </div>
+      <div class="slide">
+        <strong>“Always pushes us to be our best.”</strong>
+        <p>- Student Team</p>
+      </div>
+      <div class="slide">
+        <strong>“His kindness knows no bounds.”</strong>
+        <p>- Colleague</p>
+      </div>
+      <div class="slide">
+        <strong>“Inspires confidence and courage.”</strong>
+        <p>- Me</p>
+      </div>
+      <div class="slide">
+        <strong>“Mr Emmanuel, you’re simply the best!”</strong>
+        <p>- Everyone</p>
+      </div>
+    </div>
+
+    <div class="nav-arrow left-arrow" onclick="prevSlide()">&#10094;</div>
+    <div class="nav-arrow right-arrow" onclick="nextSlide()">&#10095;</div>
+  </div>
+
+  <button class="next-btn" onclick="location.href='final.html'">Next</button>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      if(index < 0) index = totalSlides - 1;
+      if(index >= totalSlides) index = 0;
+      currentIndex = index;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      showSlide(currentIndex + 1);
+      resetAutoSlide();
+    }
+
+    function prevSlide() {
+      showSlide(currentIndex - 1);
+      resetAutoSlide();
+    }
+
+    // Auto slide every 5 seconds
+    let slideInterval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    function resetAutoSlide() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+
+    // Initialize first slide
+    showSlide(0);
+  </script>
+</body>
+</html>
